@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EXPENSE_LIST">
+	<resultMap type="ExpenseListBean" id="expenseListBean">
+		<result property="expenseCode" column="excode" />
+		<result property="expenseName" column="exname" />
+	</resultMap>
+
+	<select id="selectExpenseList" resultMap="expenseListBean">
+		select * from expense_list
+	</select>
+</mapper>

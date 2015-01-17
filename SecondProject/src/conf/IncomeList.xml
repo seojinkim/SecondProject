@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="INCOME_LIST">
+	<resultMap type="IncomeListBean" id="incomeListBean">
+		<result property="incomeCode" column="incode" />
+		<result property="incomeName" column="inname" />
+	</resultMap>
+
+	<select id="selectIncomeList" resultMap="incomeListBean">
+		select * from income_list
+	</select>
+</mapper>

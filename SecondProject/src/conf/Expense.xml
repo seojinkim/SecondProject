@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EXPENSE">
+	<resultMap type="ExpenseBean" id="expenseBean">
+		<result property="rowIndex" column="exnum" />
+		<result property="id" column="id" />
+		<result property="expenseCode" column="excode" />
+		<result property="expensePrice" column="examount" />
+		<result property="memo" column="note" />
+		<result property="date" column="exdate" />
+		<association property="expenseName" javaType="ExpenseListBean">
+			<result property="expenseName" column="exname" />
+		</association>
+	</resultMap>
+
+	<select id="selectAll" parameterType="string" resultMap="expenseBean">
+		<!-- select * from expense where id=#{id} -->
+		<!-- select e.exnum, u.name, e.excode, el.exname, e.note, e.examount, e.exdate
+		from expense e, expense_list el, users u
+		where e.id=#{id} and e.id = u.id
+		and e.excode = el.excode -->
+		select e.exnum, e.excode, el.exname, e.note, e.examount, e.exdate
+		from expense e, expense_list el, users u
+		where e.id=#{id} and e.id = u.id and e.excode = el.excode
+		order by e.exdate
+	</select>
+
+	<select id="selectByCode" parameterType="ExpenseBean" resultMap="expenseBean">
+		select e.exnum, e.excode, el.exname, e.note, e.examount, e.exdate
+		from expense e, expense_list el, users u
+		where e.id=#{id} and e.excode=#{expenseCode} and e.id = u.id and e.excode = el.excode
+		order by e.exdate
+	</select>
+
+	<select id="selectByDate" parameterType="ExpenseBean" resultMap="expenseBean">
+		select e.exnum, e.excode, el.exname, e.note, e.examount, e.exdate
+		from expense e, expense_list el, users u
+		where e.id=#{id} and to_date(exdate)>=#{date} and e.id = u.id and e.excode = el.excode
+		order by e.exdate
+	</select>
+
+	<select id="selectByPrice" parameterType="ExpenseBean" resultMap="expenseBean">
+		<if test="expenseCode == 1">
+			select e.exnum, e.excode, el.exname, e.note, e.examount, e.exdate
+			from expense e, expense_list el, users u
+			where e.id = #{id} and
+			e.examount >= #{expensePrice} and e.id = u.id and e.excode = el.excode
+			order by e.exdate
+		</if>
+		<if test="expenseCode == 2">
+			select e.exnum, e.excode, el.exname, e.note, e.examount, e.exdate
+			from expense e, expense_list el, users u
+			where e.id = #{id} and
+			#{expensePrice} >= e.examount and e.id = u.id and e.excode = el.excode
+			order by e.exdate
+		</if>
+	</select>
+
+	<select id="selectOneByIndex" parameterType="ExpenseBean" resultMap="expenseBean">
+		select e.exnum, e.excode, el.exname, e.note, e.examount, e.exdate
+		from expense e, expense_list el, users u
+		where e.id=#{id} and e.exnum=#{rowIndex} and e.id = u.id and e.excode = el.excode
+	</select>
+
+	<insert id="insertToday" parameterType="ExpenseBean">
+		insert into expense values(((select max(exnum) from expense)+1), #{id}, #{expenseCode},
+		#{expensePrice}, #{memo}, sysdate)
+	</insert>
+
+	<insert id="insertCustomDay" parameterType="ExpenseBean">
+		insert into expense values(((select max(exnum) from expense)+1), #{id}, #{expenseCode},
+		#{expensePrice}, #{memo}, #{date})
+	</insert>
+
+	<update id="updateByIndex" parameterType="ExpenseBean">
+		update expense set excode=#{expenseCode}, examount=#{expensePrice}, note=#{memo}, exdate=#{date}
+		where id=#{id} and exnum=#{rowIndex}
+	</update>
+
+	<delete id="deleteByIndex" parameterType="ExpenseBean">
+		delete from expense where id=#{id} and exnum=#{rowIndex}
+	</delete>
+
+	<select id="selectTotalExpense" parameterType="string" resultType="int">
+		select nvl(sum(examount),0) from expense where id = #{id} and
+		substr(exdate,1,5) = (select substr(sysdate,1,5) from dual)
+	</select>
+
+</mapper>

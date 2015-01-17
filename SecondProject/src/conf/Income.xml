@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="INCOME">
+	<resultMap type="IncomeBean" id="incomeBean">
+		<result property="rowIndex" column="innum" />
+		<result property="id" column="id" />
+		<result property="incomeCode" column="incode" />
+		<result property="incomePrice" column="inamount" />
+		<result property="memo" column="note" />
+		<result property="date" column="indate" />
+		<association property="incomeName" javaType="IncomeListBean">
+			<result property="incomeName" column="inname" />
+		</association>
+	</resultMap>
+
+	<select id="selectAll" parameterType="string" resultMap="incomeBean">
+		select i.innum, i.incode, il.inname, i.note, i.inamount, i.indate
+		from income i, income_list il, users u
+		where i.id=#{id} and i.id = u.id and i.incode = il.incode
+		order by i.indate
+	</select>
+
+	<select id="selectByCode" parameterType="IncomeBean" resultMap="incomeBean">
+		select i.innum, i.incode, il.inname, i.note, i.inamount, i.indate
+		from income i, income_list il, users u
+		where i.id=#{id} and i.incode=#{incomeCode} and i.id = u.id and i.incode = il.incode
+		order by i.indate
+	</select>
+
+	<select id="selectByDate" parameterType="IncomeBean" resultMap="incomeBean">
+		select i.innum, i.incode, il.inname, i.note, i.inamount, i.indate
+		from income i, income_list il, users u
+		where i.id=#{id} and to_date(i.indate)>#{date} and i.id = u.id and i.incode = il.incode
+		order by i.indate
+	</select>
+
+	<select id="selectByPrice" parameterType="IncomeBean" resultMap="incomeBean">
+		<if test="incomeCode == 1">
+			select i.innum, i.incode, il.inname, i.note, i.inamount, i.indate
+			from income i, income_list il, users u
+			where i.id = #{id} and i.inamount >= #{incomePrice} and i.id = u.id and i.incode = il.incode
+			order by i.indate
+		</if>
+		<if test="incomeCode == 2">
+			select i.innum, i.incode, il.inname, i.note, i.inamount, i.indate
+			from income i, income_list il, users u
+			where i.id = #{id} and #{incomePrice} >= i.inamount and i.id = u.id and i.incode = il.incode
+			order by i.indate
+		</if>
+	</select>
+
+	<select id="selectOneByIndex" parameterType="IncomeBean" resultMap="incomeBean">
+		select i.innum, i.incode, il.inname, i.note, i.inamount, i.indate
+		from income i, income_list il, users u
+		where i.id=#{id} and i.innum=#{rowIndex} and i.id = u.id and i.incode = il.incode
+	</select>
+
+	<insert id="insertToday" parameterType="IncomeBean">
+		insert into income values(((select max(innum) from income)+1), #{id}, #{incomeCode}, #{incomePrice},
+		#{memo}, sysdate)
+	</insert>
+
+	<insert id="insertCustomDay" parameterType="IncomeBean">
+		insert into income values(((select max(innum) from income)+1), #{id}, #{incomeCode},
+		#{incomePrice}, #{memo}, #{date})
+	</insert>
+
+	<update id="updateByIndex" parameterType="IncomeBean">
+		update income set incode = #{incomeCode}, inamount = #{incomePrice}, note = #{memo}, indate = #{date}
+		where id = #{id} and innum = #{rowIndex}
+	</update>
+
+	<delete id="deleteByIndex" parameterType="IncomeBean">
+		delete from income where id = #{id} and innum = #{rowIndex}
+	</delete>
+
+	<select id="selectTotalIncome" parameterType="string" resultType="int">
+		select nvl(sum(inamount),0) from income where id =#{id} and substr(indate,1,5) = (select substr(sysdate,1,5) from dual)
+	</select>
+</mapper>

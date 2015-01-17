@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- *.properties 파일을 xml에 적용하기 위한 선언 -->
+	<properties resource="conf/db.properties" />
+
+	<typeAliases>
+		<typeAlias type="model.domain.AnalysisBean" alias="AnalysisBean" />
+		<typeAlias type="model.domain.ExpenseBean" alias="ExpenseBean" />
+		<typeAlias type="model.domain.ExpenseListBean" alias="ExpenseListBean" />
+		<typeAlias type="model.domain.IncomeBean" alias="IncomeBean" />
+		<typeAlias type="model.domain.IncomeListBean" alias="IncomeListBean" />
+		<typeAlias type="model.domain.UserBean" alias="UserBean" />
+	</typeAliases>
+
+	<environments default="env">
+
+		<environment id="env">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.id}" />
+				<property name="password" value="${jdbc.pw}" />
+			</dataSource>
+		</environment>
+
+	</environments>
+
+	<mappers>
+		<mapper resource="conf/Analysis.xml" />
+		<mapper resource="conf/Expense.xml" />
+		<mapper resource="conf/ExpenseList.xml" />
+		<mapper resource="conf/Income.xml" />
+		<mapper resource="conf/IncomeList.xml" />
+		<mapper resource="conf/User.xml" />
+	</mappers>
+
+</configuration>
+
+	

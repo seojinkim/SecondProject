@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="people">
+	<!-- steo03 -->
+	<resultMap id="joinTest" type="people">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<association property="hobbies" javaType="list" column="id" select="b" />
+	</resultMap>
+
+	<select id="a" parameterType="string" resultMap="joinTest">
+		select * from people where id=#{id}
+	</select>
+
+	<select id="b" parameterType="string" resultType="string">
+		select hobby from people_hobby where id=#{id}
+	</select>
+
+	<!-- step02 -->
+	<!-- 
+	<resultMap id="joinTest" type="people">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		job변수에 값 대입해야 하는 상황 
+		단, jbo은 PeopleJob 타입 따라 People의 job 변수에만 값 대입 필요
+		왜? id값은 People과 PeopleJob이 동일하기 때문에 job만 고려하면 되는 부분
+		이 tag를 보유한 people 클래스인 job 멤버 변수 타입 = PeopleJob
+		<association property="job" javaType="peopleJob">
+		    이 tag를 보유한 association tag는 PeopleJob을 의미
+		    즉, PeopleJob 객체의 result property는 멤버 변수를 의미 = job
+			<result property="job" column="job" />
+		</association>
+	</resultMap>
+	 -->
+	 
+	 <!-- Join Test -->
+	 <!-- 
+	<select id="a" parameterType="string" resultMap="joinTest">
+		select p.id, name, job
+		from people p, people_job j
+		where
+		p.id=#{id} and p.id=j.id
+	</select>
+ -->
+	<!-- step01 -->
+<!-- 
+	<resultMap id="joinTest" type="people">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		People의 job에 mapping 해야 하는 job을 b라는 id의 select tag 실행
+		<association property="job" column="id" select="b"/>
+	</resultMap>
+
+	<select id="a" parameterType="string" resultMap="joinTest">
+		select * from people where id=#{id}
+	</select>
+
+	<select id="b" parameterType="string" resultType="string">
+		select job from people_job where id=#{id}
+	</select> 
+ -->
+
+</mapper>
