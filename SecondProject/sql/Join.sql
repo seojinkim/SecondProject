@@ -1,0 +1,1 @@
+INSERT INTO MEMBER VALUES(#{id}, #{password}, #{name}, #{birthday}, #{sex}, #{grade})

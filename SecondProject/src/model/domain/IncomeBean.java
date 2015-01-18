@@ -4,40 +4,22 @@ import java.sql.Date;
 
 public class IncomeBean {
 	private int rowIndex;
+	private int incomeNum;
 	private String id;
-	private int incomeCode;
-	private IncomeListBean incomeName;
 	private int incomePrice;
+	private String incomeDate;
 	private String memo;
-	private String date;
 
 	public IncomeBean() {}
 
-	public IncomeBean(int rowIndex, String id) {
+	public IncomeBean(int rowIndex, int incomeNum, String id, int incomePrice, String incomeDate, String memo) {
 		super();
 		this.rowIndex = rowIndex;
+		this.incomeNum = incomeNum;
 		this.id = id;
-	}
-
-	public IncomeBean(int rowIndex, String id, int incomeCode, int incomePrice, String memo, String date) {
-		super();
-		this.rowIndex = rowIndex;
-		this.id = id;
-		this.incomeCode = incomeCode;
 		this.incomePrice = incomePrice;
+		this.incomeDate = incomeDate;
 		this.memo = memo;
-		this.date = date;
-	}
-
-	public IncomeBean(int rowIndex, String id, int incomeCode, IncomeListBean incomeName, int incomePrice, String memo, String date) {
-		super();
-		this.rowIndex = rowIndex;
-		this.id = id;
-		this.incomeCode = incomeCode;
-		this.incomeName = incomeName;
-		this.incomePrice = incomePrice;
-		this.memo = memo;
-		this.date = date;
 	}
 
 	public int getRowIndex() {
@@ -48,28 +30,20 @@ public class IncomeBean {
 		this.rowIndex = rowIndex;
 	}
 
+	public int getIncomeNum() {
+		return incomeNum;
+	}
+
+	public void setIncomeNum(int incomeNum) {
+		this.incomeNum = incomeNum;
+	}
+
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public int getIncomeCode() {
-		return incomeCode;
-	}
-
-	public void setIncomeCode(int incomeCode) {
-		this.incomeCode = incomeCode;
-	}
-	
-	public IncomeListBean getIncomeName() {
-		return incomeName;
-	}
-
-	public void setIncomeName(IncomeListBean incomeName) {
-		this.incomeName = incomeName;
 	}
 
 	public int getIncomePrice() {
@@ -80,6 +54,14 @@ public class IncomeBean {
 		this.incomePrice = incomePrice;
 	}
 
+	public String getIncomeDate() {
+		return incomeDate;
+	}
+
+	public void setIncomeDate(String incomeDate) {
+		this.incomeDate = incomeDate;
+	}
+
 	public String getMemo() {
 		return memo;
 	}
@@ -88,27 +70,21 @@ public class IncomeBean {
 		this.memo = memo;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("수입 [번호=");
+		builder.append("IncomeBean [rowIndex=");
 		builder.append(rowIndex);
-		builder.append(", 수입 분류=");
-		builder.append(incomeCode).append(".").append(incomeName.getIncomeName());
-		builder.append(", 금액=");
+		builder.append(", incomeNum=");
+		builder.append(incomeNum);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append(", incomePrice=");
 		builder.append(incomePrice);
-		builder.append(", 메모=");
+		builder.append(", incomeDate=");
+		builder.append(incomeDate);
+		builder.append(", memo=");
 		builder.append(memo);
-		builder.append(", 날짜=");
-		builder.append(date);
 		builder.append("]");
 		return builder.toString();
 	}

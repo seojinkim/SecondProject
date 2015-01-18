@@ -7,11 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import model.dao.ExpenseDAO;
+import model.dao.SpendDAO;
 import model.dao.IncomeDAO;
-import model.dao.UserDAO;
-import model.domain.UserBean;
+import model.dao.MemberDAO;
+import model.domain.MemberBean;
 
 /**
  * Servlet implementation class FrontController
@@ -28,50 +29,41 @@ public class ControllerServlet extends HttpServlet {
 		String url = "error.jsp";
 		if (command.equals("login")) {
 			Debugging.printDebuggingMessage("command : " + command);
-			UserBean bean = null;
+			MemberBean member = null;
 			try {
-				bean = UserDAO.isIdValid(new UserBean(request.getParameter("id"), request.getParameter("pw")));
-				if (bean != null) {
-					request.setAttribute("userInfo", bean);
-					request.setAttribute("expenseView", ExpenseDAO.selectAll(bean.getId()));
-					url = "expenseList.jsp";
-				} else {
-					request.setAttribute("error", "아이디 혹은 비밀번호 오류");
-				}
+				member = MemberDAO.isIdPwValid(new MemberBean(request.getParameter("id"), request.getParameter("pw")));
+				request.setAttribute("userInfo", member);
+				url = "notView/saveUserInfoToSession.jsp";
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			request.getRequestDispatcher(url).forward(request, response);
 		} else if (command.equals("join")) {
 			Debugging.printDebuggingMessage("command : " + command);
-			url = "join.jsp";
-			request.getRequestDispatcher(url).forward(request, response);
+			/*	url = "join.jsp";
+				request.getRequestDispatcher(url).forward(request, response);*/
 		} else if (command.equals("insert")) {
 			Debugging.printDebuggingMessage("command : " + command);
 		} else if (command.equals("update")) {
 			Debugging.printDebuggingMessage("command : " + command);
 		} else if (command.equals("delete")) {
 			Debugging.printDebuggingMessage("command : " + command);
-		} else if (command.equals("expenseList")) {
+		} else if (command.equals("spendList")) {
+			Debugging.printDebuggingMessage("command : " + command);
 			try {
-				String id = request.getParameter("id");
-				request.setAttribute("userInfo", UserDAO.selectOneByIdFromUser(id));
-				request.setAttribute("expenseView", ExpenseDAO.selectAll(id));
-				url = "expenseList.jsp";
+				request.setAttribute("spendView", SpendDAO.selectAll(request.getParameter("id")));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher(url).forward(request, response);
+			request.getRequestDispatcher("spendList.jsp").forward(request, response);
 		} else if (command.equals("incomeList")) {
+			Debugging.printDebuggingMessage("command : " + command);
 			try {
-				String id = request.getParameter("id");
-				request.setAttribute("userInfo", UserDAO.selectOneByIdFromUser(id));
-				request.setAttribute("incomeView", IncomeDAO.selectAll(id));
-				url = "incomeList.jsp";
+				request.setAttribute("incomeView", IncomeDAO.selectAll(request.getParameter("id")));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher(url).forward(request, response);
+			request.getRequestDispatcher("incomeList.jsp").forward(request, response);
 		} else {
 			Debugging.printDebuggingMessage("command : " + command);
 		}

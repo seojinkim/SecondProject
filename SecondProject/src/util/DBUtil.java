@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import controller.Debugging;
+
 public class DBUtil {
 
 	private static SqlSessionFactory factory = null;
@@ -16,6 +18,7 @@ public class DBUtil {
 		InputStream inputStream = null;
 		try {
 			inputStream = Resources.getResourceAsStream("conf/config.xml");
+			Debugging.printDebuggingMessage(inputStream.toString());
 			factory = new SqlSessionFactoryBuilder().build(inputStream);
 
 		} catch (Exception e) {

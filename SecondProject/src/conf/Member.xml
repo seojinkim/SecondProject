@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MEMBER">
+	<resultMap type="MemberBean" id="memberBean">
+		<result property="id" column="MEMBER_ID" />
+		<result property="password" column="MEMBER_PW" />
+		<result property="name" column="MEMBER_NAME" />
+		<result property="birthday" column="MEMBER_BIRTHDAY" />
+		<result property="sex" column="MEMBER_SEX" />
+		<result property="grade" column="GRADE_NUM" />
+	</resultMap>
+
+	<select id="isIdPwValid" parameterType="MemberBean" resultMap="memberBean">
+		select * from member where member_id=#{id} and member_pw=#{password}
+	</select>
+
+	<select id="selectOneByIdFromUser" parameterType="MemberBean" resultMap="memberBean">
+		select * from member where id=#{id}
+	</select>
+
+	<insert id="join" parameterType="MemberBean">
+		insert into member values(#{id}, #{password}, #{name}, #{age}, #{phoneNumber})
+		insert into analysis values(#{id}, 0)
+	</insert>
+</mapper>

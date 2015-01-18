@@ -1,1 +1,1 @@
-select * from users where id=#{id} and pw=#{pw}
+select * from member where id=#{id} and pw=#{pw}

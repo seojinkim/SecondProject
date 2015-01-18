@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPEND">
+	<resultMap type="SpendBean" id="spendBean">
+		<result property="rowIndex" column="SPEND_NUM" />
+		<result property="spendNum" column="SPENDLIST_NUM" />
+		<result property="id" column="MEMBER_ID" />
+		<result property="spendLocation" column="SPEND_LOCATION" />
+		<result property="spendPrice" column="SPEND_EXPENSE" />
+		<result property="spendDate" column="SPEND_DATE" />
+		<result property="memo" column="SPEND_MEMO" />
+	</resultMap>
+
+	<select id="selectAll" parameterType="string" resultMap="spendBean">
+		SELECT * FROM spend where MEMBER_ID=#{id}
+	</select>
+
+</mapper>

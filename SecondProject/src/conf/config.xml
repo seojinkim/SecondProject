@@ -8,16 +8,16 @@
 	<properties resource="conf/db.properties" />
 
 	<typeAliases>
-		<typeAlias type="model.domain.AnalysisBean" alias="AnalysisBean" />
-		<typeAlias type="model.domain.ExpenseBean" alias="ExpenseBean" />
-		<typeAlias type="model.domain.ExpenseListBean" alias="ExpenseListBean" />
-		<typeAlias type="model.domain.IncomeBean" alias="IncomeBean" />
+	    <typeAlias type="model.domain.GradeBean" alias="GradeBean" />
+	    <typeAlias type="model.domain.IncomeBean" alias="IncomeBean" />
 		<typeAlias type="model.domain.IncomeListBean" alias="IncomeListBean" />
-		<typeAlias type="model.domain.UserBean" alias="UserBean" />
+		<typeAlias type="model.domain.ManagerInfoBean" alias="ManagerInfoBean" />
+		<typeAlias type="model.domain.MemberBean" alias="MemberBean" />
+		<typeAlias type="model.domain.SpendBean" alias="SpendBean" />
+		<typeAlias type="model.domain.SpendListBean" alias="SpendListBean" />
 	</typeAliases>
 
 	<environments default="env">
-
 		<environment id="env">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
@@ -27,16 +27,16 @@
 				<property name="password" value="${jdbc.pw}" />
 			</dataSource>
 		</environment>
-
 	</environments>
 
 	<mappers>
-		<mapper resource="conf/Analysis.xml" />
-		<mapper resource="conf/Expense.xml" />
-		<mapper resource="conf/ExpenseList.xml" />
-		<mapper resource="conf/Income.xml" />
+	    <mapper resource="conf/Grade.xml" />
+	    <mapper resource="conf/Income.xml" />
 		<mapper resource="conf/IncomeList.xml" />
-		<mapper resource="conf/User.xml" />
+		<mapper resource="conf/ManagerInfo.xml"/>
+		<mapper resource="conf/Member.xml" />
+		<mapper resource="conf/Spend.xml" />
+		<mapper resource="conf/SpendList.xml" />
 	</mappers>
 
 </configuration>

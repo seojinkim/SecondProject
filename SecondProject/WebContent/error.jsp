@@ -7,6 +7,10 @@
 <title>오류 메시지</title>
 </head>
 <body>
-	<h2>${requestScope.error}입니다.</h2>
+	<script type="text/javascript">
+		alert('${requestScope.error}')
+	</script>
+	
+	<%-- <h2>${requestScope.error}입니다.</h2> --%>
 </body>
 </html>

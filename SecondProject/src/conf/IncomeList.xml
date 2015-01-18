@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="INCOME_LIST">
 	<resultMap type="IncomeListBean" id="incomeListBean">
-		<result property="incomeCode" column="incode" />
-		<result property="incomeName" column="inname" />
+		<result property="incomeNum" column="INCOMELIST_NUM" />
+		<result property="incomeName" column="INCOMELIST_NAME" />
 	</resultMap>
 
 	<select id="selectIncomeList" resultMap="incomeListBean">

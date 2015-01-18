@@ -1,23 +1,23 @@
 package model.domain;
 
 public class IncomeListBean {
-	private int incomeCode;
+	private int incomeNum;
 	private String incomeName;
 
 	public IncomeListBean() {}
 
-	public IncomeListBean(int incomeCode, String incomeName) {
+	public IncomeListBean(int incomeNum, String incomeName) {
 		super();
-		this.incomeCode = incomeCode;
+		this.incomeNum = incomeNum;
 		this.incomeName = incomeName;
 	}
 
-	public int getIncomeCode() {
-		return incomeCode;
+	public int getIncomeNum() {
+		return incomeNum;
 	}
 
-	public void setIncomeCode(int incomeCode) {
-		this.incomeCode = incomeCode;
+	public void setIncomeNum(int incomeNum) {
+		this.incomeNum = incomeNum;
 	}
 
 	public String getIncomeName() {
@@ -31,8 +31,12 @@ public class IncomeListBean {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(incomeCode).append(". ");
+		builder.append("IncomeListBean [incomeNum=");
+		builder.append(incomeNum);
+		builder.append(", incomeName=");
 		builder.append(incomeName);
+		builder.append("]");
 		return builder.toString();
 	}
+
 }
