@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,13 +36,14 @@
 
 			<ul class="nav navbar-top-links navbar-right">
 				<!-- /.dropdown -->
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"
-						aria-hidden="true"
-					></span> <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span
+						class="glyphicon glyphicon-chevron-down" aria-hidden="true"
+					></span>
 
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="userInfo.jsp"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 마이 페이지</a></li>
+						<li><a href="userInfo.jsp"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 마이 페이지
+						</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 설정</a></li>
 						<li class="divider"></li>
 						<li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 로그아웃</a></li>
@@ -66,18 +68,69 @@
 		<div id="page-wrapper" style="min-height: 330px;">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Money Book</h1>
+					<h1 class="page-header">${sessionScope.logInUser.name}님의회원정보</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-			<div class="row">
-				<div class="col-lg-6">
-					<h2>${sessionScope.logInUser.name}님 반갑습니다.</h2>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<form class="form-horizontal" action="controller" method="post">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">아이디</label>
+								<div class="col-sm-8">${sessionScope.logInUser.id}</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">비밀번호</label>
+								<div class="col-sm-8">
+									<input type="password" id="inputPassword" name="pw" class="form-control" placeholder="비밀번호" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">이름</label>
+								<div class="col-sm-8">${sessionScope.logInUser.name}</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">생년월일</label>
+								<div class="col-sm-8">
+									<fmt:formatDate pattern="yyyy-MM-dd" value="${sessionScope.logInUser.birthday}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">성별</label>
+								<div class="col-sm-8">
+									<%-- 									${sessionScope.logInUser.sex == 'M'} --%>
+									<c:choose>
+										<c:when test="${sessionScope.logInUser.sex == 77}">남자</c:when>
+										<c:when test="${sessionScope.logInUser.sex == 70}">여자</c:when>
+										<c:otherwise>개발자</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">회원/매니저</label>
+								<div class="col-sm-8">
+									<c:choose>
+										<c:when test="${sessionScope.logInUser.grade == 2}">회원</c:when>
+										<c:when test="${sessionScope.logInUser.grade == 1}">개발자</c:when>
+										<c:otherwise>외계인</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-7">
+									<button class="btn btn-primary btn-lg btn-block" name="command" value="join">수 정</button>
+									<span class="pull-right"><a href="javascript:history.back()">뒤로</a></span>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
-			<!-- /.row -->
+			<!-- /container -->
 		</div>
+		<!-- /.row -->
 		<!-- /#page-wrapper -->
 
 	</div>

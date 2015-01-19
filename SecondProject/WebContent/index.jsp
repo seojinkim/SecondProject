@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>석민이와 가계부</title>
+<title>Money Book</title>
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +32,7 @@
 					>
 					<div class="form-group">
 						<button class="btn btn-primary btn-lg btn-block" name="command" value="login">Sign In</button>
-						<span class="pull-right"><a href="#">Register</a></span>
+						<span class="pull-right"><a href="join.jsp" >Register</a></span>
 					</div>
 				</form>
 			</div>
