@@ -16,7 +16,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="logInUser" value="${requestScope.userInfo}" scope="session"></c:set>
-			<c:redirect url="spendList.jsp"></c:redirect>
+			<c:redirect url="main.jsp"></c:redirect>
 		</c:otherwise>
 	</c:choose>
 </body>

@@ -13,7 +13,7 @@
 	</resultMap>
 
 	<select id="selectAll" parameterType="string" resultMap="incomeBean">
-		SELECT * FROM income WHERE MEMBER_ID=#{id}
+		SELECT * FROM income where member_id=#{id} order by income_date desc
 	</select>
 
 </mapper>

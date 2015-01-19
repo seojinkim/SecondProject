@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<select id="selectAll" parameterType="string" resultMap="spendBean">
-		SELECT * FROM spend where MEMBER_ID=#{id}
+		SELECT * FROM spend where member_id=#{id} order by spend_date desc
 	</select>
 
 </mapper>
