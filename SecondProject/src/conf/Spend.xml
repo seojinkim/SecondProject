@@ -16,5 +16,13 @@
 	<select id="selectAll" parameterType="string" resultMap="spendBean">
 		SELECT * FROM spend where member_id=#{id} order by spend_date desc
 	</select>
+	
+	<select id="selectMonthSpend" parameterType="spendBean" resultType="int">
+		<!-- select substr(spend_date, 1, 5), sum(spend_expense) from spend  -->
+		<!-- 날짜별로 오름차순입니당(예전꺼가 맨 처음!) -->
+		select sum(spend_expense) from spend 
+		group by substr(spend_date, 1, 5)
+		having substr(spend_date, 1, 5) between substr(sysdate-335, 1, 5) and substr(sysdate, 1, 5);
+	</select>
 
 </mapper>
