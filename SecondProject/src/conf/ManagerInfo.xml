@@ -3,11 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MANAGER_INFO">
-	<resultMap type="IncomeListBean" id="incomeListBean">
+	<resultMap type="ManagerInfo" id="ManagerInfoBean">
 		<result property="managerInfoNum" column="MANAGER_INFO_NUM" />
-		<result property="" column="MEMBER_ID" />
+		<result property="id" column="MEMBER_ID" />
 		<result property="license" column="MANAGER_LICENSE" />
 		<result property="managingMemeber" column="MANAGE_MEMBER_NUM" />
 		<result property="career" column="CAREER_DATE" />
+		<association property="member" javaType="MemberBean">
+			<result property="id" column="member_id" />
+			<result property="name" column="member_name" />
+			<result property="birthday" column="member_birthday" />
+			<result property="sex" column="member_sex" />
+		</association>
+
+
 	</resultMap>
+
+	<!-- 매니저 선택전, 매니저 정보를 회원에게 보여주기위한 로직 -->
+	<select id="selectAllManager" resultType="ManagerInfoBean">
+
+		SELECT m.member_name,
+		m.member_birthday, m.member_sex,
+		mi.manager_license,
+		mi.manage_member_num, mi.career_date
+		from member m, manager_info mi
+		where m.member_id=mi.member_id
+
+	</select>
+
+	<!-- 매니저 선택후, 해당 매니저 정보를 회원에게 보여주기위한 로직 -->
+	<select id="selectManager" parameterType="int" resultType="ManagerInfoBean">
+		SELECT m.member_name, m.member_birthday, m.member_sex,
+		mi.manager_license, mi.manage_member_num, mi.career_date
+		from member m,
+		manager_info mi
+		where mi.MANAGER_INFO_NUM=#{managerInfoNum} and m.member_id=mi.member_id
+	</select>
+
+
+
+
 </mapper>
