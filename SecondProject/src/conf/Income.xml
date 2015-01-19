@@ -16,4 +16,19 @@
 		SELECT * FROM income where member_id=#{id} order by income_date desc
 	</select>
 
+	<insert id="insertIncome" parameterType="incomeBean" >
+	INSERT INTO INCOME VALUES(INCOME_SQ.NEXTVAL, #{incomeNum},
+ 				 , #{incomePrice}, #{incomeDate}, #{memo}) WHERE id=#{id}
+	</insert>
+
+   <update id="updateIncome" parameterType="incomeBean">
+	UPDATE spend SET INCOME_DATE=#{incomeDate}, INCOME_EXPENSE=#{incomePrice}
+						, memo=#{INCOME_MEMO} where MEMBER_ID=#{id}	and INCOME_NUM=#{rowIndex}
+						
+   </update>
+   
+   <delete id="deleteIncome" parameterType="String">
+ 	 DELETE FROM income where INCOME_NUM=#{rowIndex} and MEMBER_ID=#{id}
+   </delete>
+   
 </mapper>
