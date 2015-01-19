@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MANAGER_INFO">
-	<resultMap type="ManagerInfo" id="ManagerInfoBean">
+	<resultMap type="ManagerInfoBean" id="managerInfoBean">
 		<result property="managerInfoNum" column="MANAGER_INFO_NUM" />
 		<result property="id" column="MEMBER_ID" />
 		<result property="license" column="MANAGER_LICENSE" />
@@ -20,7 +20,7 @@
 	</resultMap>
 
 	<!-- 매니저 선택전, 매니저 정보를 회원에게 보여주기위한 로직 -->
-	<select id="selectAllManager" resultType="ManagerInfoBean">
+	<select id="selectAllManager" resultMap="managerInfoBean">
 
 		SELECT m.member_name,
 		m.member_birthday, m.member_sex,
@@ -32,7 +32,7 @@
 	</select>
 
 	<!-- 매니저 선택후, 해당 매니저 정보를 회원에게 보여주기위한 로직 -->
-	<select id="selectManager" parameterType="int" resultType="ManagerInfoBean">
+	<select id="selectManager" parameterType="int" resultMap="managerInfoBean">
 		SELECT m.member_name, m.member_birthday, m.member_sex,
 		mi.manager_license, mi.manage_member_num, mi.career_date
 		from member m,
