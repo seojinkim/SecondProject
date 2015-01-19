@@ -1,6 +1,7 @@
 package model.domain;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class SpendBean {
 	private int rowIndex;
@@ -14,6 +15,26 @@ public class SpendBean {
 	public SpendBean() {
 		// TODO Auto-generated constructor stub
 	}
+	
+
+
+
+	public SpendBean(int spendNum, String id, String spendLocation,
+			int spendPrice, String spendDate, String memo) {
+		super();
+		this.spendNum = spendNum;
+		this.id = id;
+		this.spendLocation = spendLocation;
+		this.spendPrice = spendPrice;
+		this.spendDate = spendDate;
+		this.memo = memo;
+	}
+
+
+
+
+
+
 
 	public SpendBean(int rowIndex, int spendNum, String id, String spendLocation, int spendPrice, String spendDate, String memo) {
 		super();

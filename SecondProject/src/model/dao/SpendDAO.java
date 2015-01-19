@@ -24,10 +24,10 @@ public class SpendDAO {
 	
 	//지출 내용 삽입
 	public static int insertSpend(SpendBean sb) throws SQLException{
-		SqlSession session = DBUtil.getSqlSession();
+		SqlSession session = DBUtil.getSqlSession(true);
 		int result = 0;
 		try {
-			result = session.selectOne("SPEND.insertSpend", sb);	
+			result = session.insert("SPEND.insertSpend",sb);	
 		} finally {
 			session.close();
 		}

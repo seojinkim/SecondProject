@@ -2,17 +2,19 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.dao.SpendDAO;
 import model.dao.IncomeDAO;
 import model.dao.MemberDAO;
+import model.dao.SpendDAO;
 import model.domain.MemberBean;
+import model.domain.SpendBean;
 
 /**
  * Servlet implementation class FrontController
@@ -38,6 +40,27 @@ public class ControllerServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.getRequestDispatcher(url).forward(request, response);
+		} else if (command.equals("addSpend")){
+			Debugging.printDebuggingMessage("command : " + command);
+   			int result = 0;
+			try {
+				System.out.println((MemberBean)request.getSession().getAttribute("logInUser"));
+	   			result = SpendDAO.insertSpend(new SpendBean(Integer.parseInt(request.getParameter("spendCategory")),((MemberBean)request.getSession().getAttribute("logInUser")).getId(), request.getParameter("spendLocation"), Integer.parseInt(request.getParameter("spendPrice")), request.getParameter("spendDate"), request.getParameter("spendMemo")));
+			
+				if(result==1){
+					System.out.println("사용자 지출 삽입 성공!");
+				}
+				url = "spendList.jsp";//*페이지 수정 요망..spendList출력하는 화면으로
+			} catch(SQLException e){
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher(url).forward(request, response);
+		}else if (command.equals("deleteFromSpendList")){
+			Debugging.printDebuggingMessage("command : " + command);
+			request.getAttribute("");
+			
+		
+		
 		} else if (command.equals("join")) {
 			Debugging.printDebuggingMessage("command : " + command);
 			/*	url = "join.jsp";

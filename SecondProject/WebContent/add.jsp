@@ -200,7 +200,7 @@
 									<label for="spendPrice">금액</label> <input type="text" class="form-control" name="spendPrice" id="spendPrice" placeholder="금액을 입력하세요.">
 								</div>
 								<div class="form-group">
-									<label for="spendDate">날짜</label> <input type="datetime-local" class="form-control" name="spendDate" id="spendDate">
+									<label for="spendDate">날짜</label> <input type="date" class="form-control" name="spendDate" id="spendDate">
 								</div>
 								<div class="form-group">
 									<label for="spendMemo">메모</label>
@@ -208,7 +208,7 @@
 								</div>
 								<div class="form-group">
 									<span class="pull-right">
-										<button type="submit" class="btn btn-primary" name="command" value="addSpned">추가</button>
+										<button type="submit" class="btn btn-primary" name="command" value="addSpend">추가</button>
 										<button type="button" class="btn btn-default" onclick="history.back()">취소</button>
 									</span>
 								</div>

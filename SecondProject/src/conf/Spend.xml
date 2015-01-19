@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- 지출 등록 -->
-	<insert id="insertSpend" parameterType="spendBean">
+	<insert id="insertSpend" parameterType="SpendBean">
 		INSERT INTO SPEND VALUES(SPEND_SQ.NEXTVAL, #{spendNum}, #{id}, #{spendLocation}, #{spendPrice}, #{spendDate}, #{memo})
 	</insert>
 	

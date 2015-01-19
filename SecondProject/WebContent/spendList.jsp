@@ -166,7 +166,7 @@
 						<form action="controller" method="get">
 							<div class="form-group">
 								<p>
-									<button type="submit" class="btn btn-primary" name="command">삭제</button>
+									<button type="submit" class="btn btn-primary" name="command" value="deleteFromSpendList">삭제</button>
 									<button type="submit" class="btn btn-primary" name="command" value="addFromSpendList">추가</button>
 								</p>
 							</div>
@@ -244,6 +244,7 @@
 			<!-- /.row -->
 		</div>
 		<!-- /#page-wrapper -->
+		request.setAttribute("a", spendIndex);
 
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
