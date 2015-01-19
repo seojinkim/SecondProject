@@ -12,23 +12,37 @@
 		<result property="memo" column="INCOME_MEMO" />
 	</resultMap>
 
+<!-- income 전체 -->
 	<select id="selectAll" parameterType="string" resultMap="incomeBean">
-		SELECT * FROM income where member_id=#{id} order by income_date desc
+			SELECT * FROM income where member_id=#{id} order by income_date desc
 	</select>
-
+	
+<!-- income 월별 총액  -->
+	<select id="selectMonthIncome" parameterType="String" resultType="int">
+			select sum(income_expense) from income where member_id=#{id}
+			group
+			by substr(income_date, 1, 5)
+			having substr(income_date, 1, 5)
+			 between
+			substr(sysdate-335, 1, 5) and substr(sysdate, 1, 5) 
+	</select>
+	
+<!-- income 삽입 -->
 	<insert id="insertIncome" parameterType="incomeBean" >
-	INSERT INTO INCOME VALUES (INCOME_SQ.NEXTVAL, #{id} , #{incomeNum},
+			INSERT INTO INCOME VALUES (INCOME_SQ.NEXTVAL, #{id} , #{incomeNum},
  				 , #{incomePrice}, #{incomeDate}, #{memo}) 
 	</insert>
-
+	
+<!-- income 수정 -->
    <update id="updateIncome" parameterType="incomeBean">
-	UPDATE spend SET INCOME_DATE=#{incomeDate}, INCOME_EXPENSE=#{incomePrice}
+			UPDATE spend SET INCOME_DATE=#{incomeDate}, INCOME_EXPENSE=#{incomePrice}
 						, memo=#{INCOME_MEMO} where MEMBER_ID=#{id}	and INCOME_NUM=#{rowIndex}
 						
    </update>
    
+ <!-- income id로 받아와서 삭제 -->  
    <delete id="deleteIncome" parameterType="String">
- 	 DELETE FROM income where INCOME_NUM=#{rowIndex} and MEMBER_ID=#{id}
+ 			 DELETE FROM income where INCOME_NUM=#{rowIndex} and MEMBER_ID=#{id}
    </delete>
    
 </mapper>
