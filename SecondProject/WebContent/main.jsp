@@ -41,10 +41,10 @@
 
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Profile</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
+						<li><a href="userInfo.jsp"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 마이 페이지</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 설정</a></li>
 						<li class="divider"></li>
-						<li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 로그아웃</a></li>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
