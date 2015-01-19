@@ -17,8 +17,8 @@
 	</select>
 
 	<insert id="insertIncome" parameterType="incomeBean" >
-	INSERT INTO INCOME VALUES(INCOME_SQ.NEXTVAL, #{incomeNum},
- 				 , #{incomePrice}, #{incomeDate}, #{memo}) WHERE id=#{id}
+	INSERT INTO INCOME VALUES (INCOME_SQ.NEXTVAL, #{id} , #{incomeNum},
+ 				 , #{incomePrice}, #{incomeDate}, #{memo}) 
 	</insert>
 
    <update id="updateIncome" parameterType="incomeBean">
