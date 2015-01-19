@@ -42,8 +42,9 @@ public class ControllerServlet extends HttpServlet {
 			Debugging.printDebuggingMessage("command : " + command);
 			/*	url = "join.jsp";
 				request.getRequestDispatcher(url).forward(request, response);*/
-		} else if (command.equals("addFromSpendList")) {
+		} else if (command.equals("addFromSpendList") || command.equals("addFromIncomeList")) {
 			Debugging.printDebuggingMessage("command : " + command);
+			request.setAttribute("addCommand", command);
 			url = "add.jsp";
 			request.getRequestDispatcher(url).forward(request, response);
 		} else if (command.equals("update")) {
