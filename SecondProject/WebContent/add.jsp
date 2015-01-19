@@ -64,16 +64,19 @@
 			<!-- /.navbar-static-side -->
 		</nav>
 
+		<c:choose>
+			<c:when test="${requestScope.addCommand == 'addFromSpendList'}">
+				<div id="page-wrapper" style="min-height: 330px;">
 
-		<div id="page-wrapper" style="min-height: 330px;">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">지출</h1>
-				</div>
-				<!-- /.col-lg-12 -->
-			</div>
-			<!-- /.row -->
-			<!-- <div class="row">
+					<div class="row">
+
+						<div class="col-lg-12">
+							<h1 class="page-header">지출</h1>
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>
+					<!-- /.row -->
+					<!-- <div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -160,59 +163,66 @@
 				</div>
 			</div>
 			/.row -->
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="pull-right">
-						<p></p>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="pull-right">
+								<p></p>
+							</div>
+						</div>
 					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<form action="controller" method="get">
+								<div class="form-group">
+									<label for="spendCategory">분류</label> <select class="form-control" name="spendCategory" id="spendCategory">
+										<option value="2">식비</option>
+										<option value="3">주거/통신</option>
+										<option value="4">생활용품</option>
+										<option value="5">의복/미용</option>
+										<option value="6">건강/문화</option>
+										<option value="7">교육/육아</option>
+										<option value="8">교통/차량</option>
+										<option value="9">경조사/회비</option>
+										<option value="10">세금/이자</option>
+										<option value="11">용돈/기타</option>
+										<option value="12">카드대금</option>
+										<option value="13">저축/보험</option>
+										<option value="14">이체/대체</option>
+										<option value="15">기타</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="spendLocation">장소</label> <input type="text" class="form-control" name="spendLocation" id="spendLocation"
+										placeholder="장소를 입력하세요."
+									>
+								</div>
+								<div class="form-group">
+									<label for="spendPrice">금액</label> <input type="text" class="form-control" name="spendPrice" id="spendPrice" placeholder="금액을 입력하세요.">
+								</div>
+								<div class="form-group">
+									<label for="spendDate">날짜</label> <input type="datetime-local" class="form-control" name="spendDate" id="spendDate">
+								</div>
+								<div class="form-group">
+									<label for="spendMemo">메모</label>
+									<textarea class="form-control" rows="3" name="spendMemo"></textarea>
+								</div>
+								<div class="form-group">
+									<span class="pull-right">
+										<button type="submit" class="btn btn-primary" name="command" value="addSpned">추가</button>
+										<button type="button" class="btn btn-default" onclick="history.back()">취소</button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /.row -->
+
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<form action="controller" method="get">
-						<div class="form-group">
-							<label for="spendCategory">분류</label> <select class="form-control" name="spendCategory" id="spendCategory">
-								<option value="2">식비</option>
-								<option value="3">주거/통신</option>
-								<option value="4">생활용품</option>
-								<option value="5">의복/미용</option>
-								<option value="6">건강/문화</option>
-								<option value="7">교육/육아</option>
-								<option value="8">교통/차량</option>
-								<option value="9">경조사/회비</option>
-								<option value="10">세금/이자</option>
-								<option value="11">용돈/기타</option>
-								<option value="12">카드대금</option>
-								<option value="13">저축/보험</option>
-								<option value="14">이체/대체</option>
-								<option value="15">기타</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="spendLocation">장소</label> <input type="text" class="form-control" name="spendLocation" id="spendLocation" placeholder="장소를 입력하세요.">
-						</div>
-						<div class="form-group">
-							<label for="spendPrice">금액</label> <input type="text" class="form-control" name="spendPrice" id="spendPrice" placeholder="금액을 입력하세요.">
-						</div>
-						<div class="form-group">
-							<label for="spendDate">날짜</label> <input type="datetime-local" class="form-control" name="spendDate" id="spendDate">
-						</div>
-						<div class="form-group">
-							<label for="spendMemo">메모</label>
-							<textarea class="form-control" rows="3" name="spendMemo"></textarea>
-						</div>
-						<div class="form-group">
-							<span class="pull-right">
-								<button type="submit" class="btn btn-primary" name="command" value="addSpned">추가</button>
-								<button type="button" class="btn btn-default" onclick="history.back()">취소</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /#page-wrapper -->
+				<!-- /#page-wrapper -->
+			</c:when>
+			<c:when test="${requestScope.addCommand == 'addFromIncomeList'}"></c:when>
+			<c:otherwise></c:otherwise>
+		</c:choose>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
