@@ -16,5 +16,20 @@
 	<select id="selectAll" parameterType="string" resultMap="spendBean">
 		SELECT * FROM spend where member_id=#{id} order by spend_date desc
 	</select>
+	
+	<!-- 지출 등록 -->
+	<insert id="insertSpend" parameterType="spendBean">
+		INSERT INTO SPEND VALUES(SPEND_SQ.NEXTVAL, #{spendNum}, #{id}, #{spendLocation}, #{spendPrice}, #{spendDate}, #{memo})
+	</insert>
+	
+	<!-- 지출목록 수정 -->
+	<update id="updateSpend" parameterType="spendBean">
+		update spend set spend_date=#{spendDate}, spend_price=#{spendPrice}, spend_location=#{spendLocation}, spend_memo=#{memo} where member_id=#{id} and spend_num=#{spnedNum}
+	</update>
+	
+	<!-- 지출 삭제 -->
+	<delete id="deleteSpend" parameterType="spendBean">
+		delete from spend where member_id=#{id} and spend_num=#{spendNum}
+	</delete>
 
 </mapper>

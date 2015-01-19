@@ -21,4 +21,42 @@ public class SpendDAO {
 		}
 		return spendList;
 	}
+	
+	//지출 내용 삽입
+	public static int insertSpend(SpendBean sb) throws SQLException{
+		SqlSession session = DBUtil.getSqlSession();
+		int result = 0;
+		try {
+			result = session.selectOne("SPEND.insertSpend", sb);	
+		} finally {
+			session.close();
+		}
+		return result;	//select 성공하면 1을 리턴
+	}
+	
+	//지출 목록 수정
+	public static int updateSpend(SpendBean sb) throws SQLException{
+		SqlSession session = DBUtil.getSqlSession();
+		int result = 0;
+		try {
+			result = session.selectOne("SPEND.updateSpend", sb);	
+			//System.out.println(result);
+		} finally {
+			session.close();
+		}
+		return result;	//update 성공하면 1을 리턴
+	}
+	
+	//지출 목록 삭제
+	public static int deleteSpend(SpendBean sb) throws SQLException{
+		SqlSession session = DBUtil.getSqlSession();
+		int result = 0;
+		try {
+			result = session.selectOne("SPEND.deleteSpend", sb);
+			//System.out.println(result);
+		} finally {
+			session.close();
+		}
+		return result;	//delete 성공하면 1을 리턴
+	}
 }
