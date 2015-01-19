@@ -3,11 +3,11 @@ package model.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.domain.SpendBean;
+
 import org.apache.ibatis.session.SqlSession;
 
-import controller.Debugging;
 import util.DBUtil;
-import model.domain.SpendBean;
 
 public class SpendDAO {
 
@@ -20,5 +20,17 @@ public class SpendDAO {
 			session.close();
 		}
 		return spendList;
+	}
+	
+	public static List selectMonthSpend(SpendBean ib) throws SQLException{
+		SqlSession session = DBUtil.getSqlSession();
+		List list = null;
+		try {
+			list = session.selectList("SPEND.selectMonthSpend", ib);
+			System.out.println(list);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 }

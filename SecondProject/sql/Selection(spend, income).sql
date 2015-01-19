@@ -43,11 +43,11 @@ select incomelist_num, count(incomelist_num) from income group by incomelist_num
 -- 지출
 select substr(spend_date, 1, 5), sum(spend_expense) from spend 
 group by substr(spend_date, 1, 5)
-having substr(spend_date, 1, 5) between '14/02/01' and '15/01/31';
+having substr(spend_date, 1, 5) between substr(sysdate-335, 1, 5) and substr(sysdate, 1, 5);
 
 -- 수입
 select substr(income_date, 1, 5), sum(income_expense) from income
 group by substr(income_date, 1, 5)
-having substr(income_date, 1, 5) between '14/02/01' and '15/01/31';
+having substr(income_date, 1, 5) between substr(sysdate-335, 1, 5) and substr(sysdate, 1, 5);
 
 
